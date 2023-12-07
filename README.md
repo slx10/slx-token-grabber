@@ -16,7 +16,7 @@ pip install requests pypiwin32 pycryptodome
 
 1. Run the script using Python 3.
 2. The script will search for authentication tokens in various locations on your system, including Discord and popular web browsers.
-3. If tokens are found, they will be displayed in the console.
+3. If tokens are found, they will be returned.
 
 ## Script Overview
 
